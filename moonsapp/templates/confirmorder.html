@@ -1,0 +1,215 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+<link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+    <title>Document</title>
+    <style>
+         .Body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .OrderInfoPage{
+            width: 25%;
+            box-shadow: 0px 5px 20px 0px grey;
+            margin: auto;
+            margin-top: 180px;
+            margin-bottom: 50px;
+            padding: 2% 4%;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .Orderdetails{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+         
+        }
+        .ReturnHome{
+          margin-top:20px ;
+          height: 50px;
+          width: 185px;
+          font-size: 18px;
+          background-color: #f7633b;
+          border: none;
+          border-radius: 10px;
+        }
+
+        .ReturnHome:hover{
+          background-color: #f7633b;
+        }
+    </style>
+</head>
+<body>
+
+ 
+<div class="navbarr" style="height: 56px;">
+   <a href="about"> 
+   <img src="{% static 'logo.jpeg' %}"  height="86px" width="100px" style="margin-top: -15px;">
+  </a> 
+  {% if user.is_authenticated %}
+  <span class="links"> Hello, {{user.username}} </span>
+  {% endif %}
+  <div class="links">  
+  
+    <a href="/"> Home </a>
+            <span href="#" class="sale"> 
+          
+              Sale 
+              <sup> New </sup>
+              <div class="dropdown">
+              <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>
+                <br>
+                 <p>  Flat 30% Off </p>  </div> 
+                  
+              <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a> <br>  <p>  Flat 30% Off </p>  </div>
+              <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p>  Flat 30% Off  </p></div>
+               <div> <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p> Flat 30% Off </p>  </div>
+
+              </div>
+            </span>
+            
+            <a href="winter"> Winter Collection </a>
+            <a href="newin">  New In </a>
+          
+   </div> 
+   
+   <div class="links-right"> 
+       <a href="#" >
+         <div class="icon-text">
+       <img src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw17a0e2f4/images/track.svg">
+      <span> Track   </span>        
+       </div> 
+    </a>
+
+     <a href="#" >
+<div class="icon-text">
+        <img style="width: 24px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw40f1f8d5/images/search.svg">
+    <span style="font-size: 15px;"> Search  </span> 
+    </div>
+     </a>
+     
+     {% if user.is_authenticated %}
+     <a href="logout"> 
+      <div class="icon-text"> 
+        <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+      <span> Logout  </span> </div> </a>
+     {% else %}
+     <a href="register">
+      <div class="icon-text">  
+        <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+        <span> Account </span>
+    </div>
+    </a>
+    {% endif%}
+     <a href="shipping">
+    <div class="icon-text" >  
+    
+        <img  style="width: 22px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dwf454b0df/images/shopping.svg">
+     
+    <span>Bag</span> 
+    </div></a>
+</div>
+</div>
+
+       <div class="Body">  
+     <div class="OrderInfoPage">
+      <h1 style="text-align: center;">Your Order has been placed. </h1><br>
+        
+      <div class="Orderdetails">
+      
+        <div> <div id="productInfoContainer">  </div>
+              <!-- <p><strong>Product: </strong>Product No 1</p>
+              <p><strong>Amount: </strong>25$</p> -->
+              
+              <p><strong>Mode of Payment: </strong>{{latest_order.payment_option}}</p>
+              <p><strong>Type of Shipping: </strong>{{latest_order.shipping_method}}</p><br><br>
+            </div>
+            <div style="margin-top: -8px;"> 
+              <strong>Customer Details: </strong><br>   
+              <p><strong>  Order ID:</strong> #{{latest_order.orderID}} </p>
+              <p><strong>Name: </strong> {{latest_order.name}}</p>
+              <p><strong>Email:</strong> {{latest_order.email}}</p>
+              <p><strong> Phone no.: </strong> {{latest_order.phone}}</p>
+              <p><strong> Address: </strong> {{latest_order.address}}</p>
+            </div>
+        
+        </div>
+        <button id="continueShoppingBtn" class="ReturnHome"><a style="text-decoration: none; color: white;" href="/">Continue Shopping</a></button>
+     </div>
+     
+    </div>
+
+    
+<div class="row">
+  <div class="col-sm-12">
+    <div class="footer_bottom">
+      <div class="col-sm-3">  
+    <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> 100% Safe Checkout  </span> <br>
+    <img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw3d659671/images/FooterImages/pay.png">
+  </div>
+  
+  <div class="col-sm-2" style="display: flex; justify-content: flex-end;  flex-direction: column;">  
+    <span   style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; display: flex; justify-content: flex-end;"> Secured By  </span> 
+    <span style="display: flex; justify-content: flex-end;">
+    <img style="height: 36px; width: 147px;" src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_l_m.gif">
+  </span>
+  </div>
+  <div class="col-sm-1" style="display: flex; justify-content: flex-end;">
+    <img style="width: 50.58px; height: fit-content;"  src="{% static 'logo.jpeg' %}">
+  </div>
+  <div class="col-sm-6" style="display: flex; justify-content: flex-end;">  
+    <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> Copyright © 2023 Khaadi Corporation Limited & Khaadi Pakistan SMC Pvt. Ltd. All Rights Reserved. </span> <br>
+   
+  </div>
+  
+  </div>  
+  
+  </div>
+  </div>
+</body>
+
+<script>
+  document.getElementById('continueShoppingBtn').addEventListener('click', function() {
+      // Clear local storage
+      localStorage.clear();
+      // Redirect to the 'index' page
+      window.location.href = '/';
+  });
+
+
+// Retrieve product information from local storage
+const storedProductInfo = JSON.parse(localStorage.getItem('cart')) || [];
+let totalAmount = 0;
+// Display the products in the specified format
+const productInfoContainer = document.getElementById('productInfoContainer');
+
+storedProductInfo.forEach(product => {
+    const productInfo = `<p><strong> </strong>${product.productName}</p>`;
+
+    totalAmount+=product.price;                     
+    // Append productInfo to the container
+    productInfoContainer.innerHTML += productInfo;
+});
+
+const totalAmountInfo = `<p><strong>Total Amount: </strong>${totalAmount.toFixed(2)} Pkr</p>`;
+productInfoContainer.innerHTML += totalAmountInfo
+  </script>
+
+  
+</html>

@@ -1,0 +1,443 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<!-- <h1> Input your Text in the Word Counter Below  </h1>  
+
+    <form method="POST" action="counter">
+
+        {% csrf_token %}
+        <textarea name="text" role="25" cols="100"> </textarea>    
+        <input type="submit">
+    </form> -->
+
+    
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Moonsapp  </title>
+<link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body> 
+    <div class="top-bar">
+        <p class="message"> New day, new sale. Check out our COLLECTIONS here upto 70% off!  
+            <a href="#"> Shop Now!</a>    
+        </p>
+        
+    </div>
+
+    <div class="navbarr">
+       <a href="about"> 
+       <img src="{% static 'logo.jpeg' %}"  height="86px" width="100px" style="margin-top: -15px;">
+      </a> 
+      {% if user.is_authenticated %}
+      <span class="links"> Hello, {{user.username}} </span>
+      {% endif %}
+      <div class="links">  
+      
+        <a href="/"> Home </a>
+                <span href="#" class="sale"> 
+              
+                  Sale 
+                  <sup> New </sup>
+                  <div class="dropdown">
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>
+                    <br>
+                     <p>  Flat 30% Off </p>  </div> 
+                      
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a> <br>  <p>  Flat 30% Off </p>  </div>
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p>  Flat 30% Off  </p></div>
+                   <div> <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p> Flat 30% Off </p>  </div>
+
+                  </div>
+                </span>
+                
+                <a href="winter"> Winter Collection </a>
+                <a href="newin">  New In </a>
+              
+       </div> 
+       
+       <div class="links-right"> 
+           <a href="#" >
+             <div class="icon-text">
+           <img src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw17a0e2f4/images/track.svg">
+          <span> Track   </span>        
+           </div> 
+        </a>
+
+         <a href="#" >
+<div class="icon-text">
+            <img style="width: 24px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw40f1f8d5/images/search.svg">
+        <span style="font-size: 15px;"> Search  </span> 
+        </div>
+         </a>
+         
+         {% if user.is_authenticated %}
+         <a href="logout"> 
+          <div class="icon-text"> 
+            <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+          <span> Logout  </span> </div> </a>
+         {% else %}
+         <a href="register">
+          <div class="icon-text">  
+            <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+            <span> Account </span>
+        </div>
+        </a>
+        {% endif%}
+         <a href="shipping">
+        <div class="icon-text" >  
+        
+            <img  style="width: 22px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dwf454b0df/images/shopping.svg">
+         
+        <span>Bag</span> 
+        </div></a>
+    </div>
+    </div>
+
+
+    <div class="winter"> 
+     <img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dwe10661df/images/plpbanners/NEW-PLP-Category-Banner-RTW-KURTAA-1440-X-320.jpg" width="100%">
+     
+    <div class="sortby"> 
+<span> Sort By:  </span>
+<select > 
+<option> Price High to Low  </option>
+<option> Price Low to High </option>
+<option> Latest   </option>    
+</select>
+    
+    </div>
+    <div class="container-fluid " style="margin-top: 0.5rem;">
+        <div class="row imgmargins" >
+          <div class="col-sm-3">
+            <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dwca669ccc/images/hi-res/ich231111_navy_4.jpg?sw=400&sh=600">
+        <button class="addtoC"> Add to Cart  </button>  
+    <div class="imgbody">
+     <span style="font-weight: bold;"> 
+        Fabrics 2 Piece
+     </span>
+     <span> 
+       Dyed Embroidered Crosshatch | Top Bottoms
+     </span>
+     <span>
+        Rs 3,990
+     </span>
+    </div>    
+    </div>
+          <div class="col-sm-3">
+            <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dwca669ccc/images/hi-res/ich231111_navy_4.jpg?sw=400&sh=600">
+            <button class="addtoC"> Add to Cart  </button>  
+            <div class="imgbody">
+              <span style="font-weight: bold;"> 
+                 Fabrics 2 Piece
+              </span>
+              <span> 
+                Dyed Embroidered Crosshatch | Top Bottoms
+              </span>
+              <span>
+                 Rs 3,990
+              </span>
+             </div>  
+        </div>
+          <div class="col-sm-3">
+            <img class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dw19bd1593/images/hi-res/alk231105_navy_1.jpg?sw=400&sh=600">
+            <button class="addtoC"> Add to Cart  </button>   
+            <div class="imgbody">
+              <span style="font-weight: bold;"> 
+                 Fabrics 2 Piece
+              </span>
+              <span> 
+                Dyed Embroidered Crosshatch | Top Bottoms
+              </span>
+              <span>
+                 Rs 3,990
+              </span>
+             </div> 
+        </div>
+          <div class="col-sm-3">
+            <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dw3cb3ff6b/images/hi-res/alk231105_green_1.jpg?sw=400&sh=600">
+            <button class="addtoC"> Add to Cart  </button>  
+            <div class="imgbody">
+              <span style="font-weight: bold;"> 
+                 Fabrics 2 Piece
+              </span>
+              <span> 
+                Dyed Embroidered Crosshatch | Top Bottoms
+              </span>
+              <span>
+                 Rs 3,990
+              </span>
+             </div>   
+        </div>
+        </div> 
+    </div>
+    <div class="container-fluid " style="margin-top: 0.5rem;">
+      <div class="row imgmargins" >
+        <div class="col-sm-3">
+          <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dwca669ccc/images/hi-res/ich231111_navy_4.jpg?sw=400&sh=600">
+      <button class="addtoC"> Add to Cart  </button>  
+  <div class="imgbody">
+   <span style="font-weight: bold;"> 
+      Fabrics 2 Piece
+   </span>
+   <span> 
+     Dyed Embroidered Crosshatch | Top Bottoms
+   </span>
+   <span>
+      Rs 3,990
+   </span>
+  </div>    
+  </div>
+        <div class="col-sm-3">
+          <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dwca669ccc/images/hi-res/ich231111_navy_4.jpg?sw=400&sh=600">
+          <button class="addtoC"> Add to Cart  </button>  
+          <div class="imgbody">
+            <span style="font-weight: bold;"> 
+               Fabrics 2 Piece
+            </span>
+            <span> 
+              Dyed Embroidered Crosshatch | Top Bottoms
+            </span>
+            <span>
+               Rs 3,990
+            </span>
+           </div>  
+      </div>
+        <div class="col-sm-3">
+          <img class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dw19bd1593/images/hi-res/alk231105_navy_1.jpg?sw=400&sh=600">
+          <button class="addtoC"> Add to Cart  </button>   
+          <div class="imgbody">
+            <span style="font-weight: bold;"> 
+               Fabrics 2 Piece
+            </span>
+            <span> 
+              Dyed Embroidered Crosshatch | Top Bottoms
+            </span>
+            <span>
+               Rs 3,990
+            </span>
+           </div> 
+      </div>
+        <div class="col-sm-3">
+          <img  class="imgsize"  src="https://pk.khaadi.com/dw/image/v2/BJTG_PRD/on/demandware.static/-/Sites-khaadi-master-catalog/default/dw3cb3ff6b/images/hi-res/alk231105_green_1.jpg?sw=400&sh=600">
+          <button class="addtoC"> Add to Cart  </button>  
+          <div class="imgbody">
+            <span style="font-weight: bold;"> 
+               Fabrics 2 Piece
+            </span>
+            <span> 
+              Dyed Embroidered Crosshatch | Top Bottoms
+            </span>
+            <span>
+               Rs 3,990
+            </span>
+           </div>   
+      </div>
+      </div> 
+  </div>
+
+  <div class="container-sm"> 
+    <div class="row" style="margin-top: 5.5rem;">
+     <div class="col-sm-12" style="display: flex; background-color: #f1f1f1;     padding: 15px 232px 0; margin-top: -66px;
+     z-index: 3">
+       <div class="col-sm-4" style="display: flex; justify-content: center;  gap: 24px; "  >
+        <img class="footericons" src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw3e0efc1c/images/icons/shipping.svg">
+        <div>
+        <span class="footerfont"> SHIPPING CHARGES  </span>
+        <br>
+        <span class="footerfont2">Starting from Rs.120 </span>
+       </div>
+     </div>
+       <div class="col-sm-4" style="display: flex; justify-content: center; gap: 24px; ">
+         <img class="footericons" src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dwd072f182/images/icons/support.svg">
+         <div>
+           <span class="footerfont">  SUPPORT 24/7  </span>
+           <br>
+           <span class="footerfont2"> Contact us 24 hours a day, 7 days a week! </span>
+          </div>
+   
+       </div>
+       <div class="col-sm-4" style="display: flex; justify-content: center; gap: 24px;">
+       <img class="footericons" src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dwe57909af/images/icons/track-1.svg">
+       <div>
+         <span class="footerfont" >  TRACK YOUR ORDER  </span>
+         <br>
+         <span class="footerfont2"> Track Your Order for Quick Updates! </span>
+        </div>
+   
+   
+       </div>
+   
+     </div>
+    </div>
+   </div>
+   
+    <div class="footer">
+     <div class="container">
+    <div class="row"> 
+    
+       <div class="col-sm-4">
+         <strong>
+      <span style="font-size: 15px ;"> BE THE FIRST TO KNOW </span>
+     </strong>
+     <br> 
+     <p style="font-size: 14px;"> Sign up for our newsletter to receive updates on special offers, news and events.</p>
+       </div>
+       <div class="col-sm-5" style="display:flex;">
+         <div style="position: relative; width: 80%;
+         height: 45px;" > 
+         <div class="envelopicon">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+           <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"></path>
+           </svg>
+         </div>  
+         <input type="email" class="email" placeholder="Email Address"> 
+     
+       </div>
+   
+       <button class="subscribe" type="submit"> SUBSCRIBE </button>
+       
+     </div>
+       <div class="col-sm-3" style="display: flex;
+       justify-content: flex-end;">
+         <div style="display: flex; justify-content: center; gap: 20px;">
+           <a class="footericons"  href="#"><img  src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw0ac6cef1/images/FooterImages/youtube_icon.png" style="width: 50px !important; margin-left: -10px"></a>
+           <a  class="footericons" href="#"><img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dwa79835e2/images/FooterImages/facebook_social_media_icon.png"></a>
+           <a class="footericons"  href="#"><img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dwe1454976/images/FooterImages/instagram_icon.png"></a>
+           <a class="footericons"  href="#"><img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw3ef857fd/images/FooterImages/twitter.png"></a>
+         </div>
+   
+       </div>
+   
+    </div>
+    <br>
+    <div class="row">
+   <div class="col-sm-12" style="display: flex; justify-content: center;">
+     <div class="col-sm-2">
+   <strong>
+     <span> GET IN TOUCH </span>
+   </strong>
+   <br> <br>
+   <div>
+     <strong>
+       <span>  ADDRESS </span>
+     </strong>
+     <p style="font-size: 13px;"> 22nd Floor, Sky Tower B- East Wing, Dolmen City, Block 4, Marine Drive Clifton, Karachi, Pakistan.</p>
+   
+   <strong>
+     <span> PHONE  </span>
+   </strong>
+   <p style="font-size: 13px;">   0800 74007</p>
+   
+   <strong>
+     <span> EMAIL  </span>
+   </strong>
+   <p style="font-size: 13px;">  customercare@khaadi.com </p>
+   </div>
+   
+     </div>
+     <div class="col-sm-2" style=" display: flex; flex-direction: column;     padding-left: 80px;">
+       
+       <strong>
+       <span>  OUR COMPANY </span>
+     </strong>
+       <br>
+     <div>
+       <a style="font-size: 13px; color: black;"  href="#"> About Us </a> <br>
+       <a href="#"  style="font-size: 13px; color: black;" > Contact Us </a> <br>
+        <a href="#"  style="font-size: 13px; color: black;" >   Blogs  </a> 
+   
+   
+   
+     </div>
+     </div>
+     
+     <div class="col-sm-5" style=" display: flex;  flex-direction: column; padding-left: 90px;">
+       <strong>
+         <span>  CUSTOMER SUPPORT </span>
+       </strong>
+   
+       <br>
+       <div style="display: flex;">
+       <div class="col-sm-6">
+         <a  style="font-size: 13px; color: black;"  href="#"> Customer Service </a> <br>
+         <a href="#"  style="font-size: 13px; color: black;" >   Store Locator </a> <br>
+          <a href="#"  style="font-size: 13px; color: black;" >  Disclaimer  </a> 
+       </div>
+       <div class="col-sm-6">
+         <a  style="font-size: 13px; color: black;"  href="#"> Shipping & Handling</a> <br>
+         <a href="#"  style="font-size: 13px; color: black;" >    Returns & Exchanges </a> <br>
+          <a href="#"  style="font-size: 13px; color: black;" >   FAQs </a> 
+       </div>
+     </div>
+     </div>
+     <div class="col-sm-3" style=" display: flex;  flex-direction: column; padding-left: 90px;">
+       <strong>
+         <span> HELP </span>
+       </strong>
+         <br>
+     <div>
+       <a style="font-size: 13px; color: black;"  href="#"> Track Your Order </a> <br>
+       <a href="#"  style="font-size: 13px; color: black;" >   Terms & Conditions </a> <br>
+        <a href="#"  style="font-size: 13px; color: black;" >    Privacy Policy  </a> 
+     </div>
+    
+     </div>
+   </div>
+   
+    </div>
+   
+   
+   </div>
+   
+   <div class="row">
+   <div class="col-sm-12">
+     <div class="footer_bottom">
+       <div class="col-sm-3">  
+     <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> 100% Safe Checkout  </span> <br>
+     <img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw3d659671/images/FooterImages/pay.png">
+   </div>
+   
+   <div class="col-sm-2" style="display: flex; justify-content: flex-end;  flex-direction: column;">  
+     <span   style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; display: flex; justify-content: flex-end;"> Secured By  </span> 
+     <span style="display: flex; justify-content: flex-end;">
+     <img style="height: 36px; width: 147px;" src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_l_m.gif">
+   </span>
+   </div>
+   <div class="col-sm-1" style="display: flex; justify-content: flex-end;">
+     <img style="width: 50.58px; height: fit-content;"  src="{% static 'logo.jpeg' %}">
+   </div>
+   <div class="col-sm-6" style="display: flex; justify-content: flex-end;">  
+     <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> Copyright © 2023 Khaadi Corporation Limited & Khaadi Pakistan SMC Pvt. Ltd. All Rights Reserved. </span> <br>
+    
+   </div>
+   
+   </div>  
+   
+   </div>
+   </div>
+   </div>
+
+
+    <script> 
+
+      window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbarr');
+        var topBar = document.querySelector('.top-bar');
+        if (window.scrollY > topBar.offsetHeight) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
+        }
+      });
+  </script>

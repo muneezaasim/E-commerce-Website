@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Login and Registration Form in HTML & CSS | CodingLab </title>-->
+    <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        /* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+.Body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff4f8;
+  padding: 30px;
+}
+.container{
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  perspective: 2700px;
+}
+.container .cover{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 50%;
+  z-index: 98;
+  transition: all 1s ease;
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+.container #flip:checked ~ .cover{
+  transform: rotateY(-180deg);
+}
+ .container .cover .front,
+ .container .cover .back{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.cover .back{
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.container .cover::before,
+.container .cover::after{
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #7d2ae8;
+  opacity: 0.5;
+  z-index: 12;
+}
+.container .cover::after{
+  opacity: 0.3;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.container .cover img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+.container .cover .text{
+  position: absolute;
+  z-index: 130;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cover .text .text-1,
+.cover .text .text-2{
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+.cover .text .text-2{
+  font-size: 15px;
+  font-weight: 500;
+}
+.container .forms{
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+.container .form-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-content .login-form,
+.form-content .signup-form{
+  width: calc(100% / 2 - 25px);
+}
+.forms .form-content .title{
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+.forms .form-content .title:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 25px;
+  background: #7d2ae8;
+}
+.forms .signup-form  .title:before{
+  width: 20px;
+}
+.forms .form-content .input-boxes{
+  margin-top: 30px;
+}
+.forms .form-content .input-box{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.form-content .input-box input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.form-content .input-box input:focus,
+.form-content .input-box input:valid{
+  border-color: #7d2ae8;
+}
+.form-content .input-box i{
+  position: absolute;
+  color: #7d2ae8;
+  font-size: 17px;
+}
+.forms .form-content .text{
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+.forms .form-content .text a{
+  text-decoration: none;
+}
+.forms .form-content .text a:hover{
+  text-decoration: underline;
+}
+.forms .form-content .button{
+  color: #fff;
+  margin-top: 40px;
+}
+.forms .form-content .button input{
+  color: #fff;
+  background: #7d2ae8;
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.forms .form-content .button input:hover{
+  background: #5b13b9;
+}
+.forms .form-content label{
+  color: #5b13b9;
+  cursor: pointer;
+}
+.forms .form-content label:hover{
+  text-decoration: underline;
+}
+.forms .form-content .login-text,
+.forms .form-content .sign-up-text{
+  text-align: center;
+  margin-top: 25px;
+}
+.container #flip{
+  display: none;
+}
+@media (max-width: 730px) {
+  .container .cover{
+    display: none;
+  }
+  .form-content .login-form,
+  .form-content .signup-form{
+    width: 100%;
+  }
+  .form-content .signup-form{
+    display: none;
+  }
+  .container #flip:checked ~ .forms .signup-form{
+    display: block;
+  }
+  .container #flip:checked ~ .forms .login-form{
+    display: none;
+  }
+}
+
+    </style>
+   </head>
+<body>
+ 
+  
+  <!-- <h1> Input your Text in the Word Counter Below  </h1>  
+  
+      <form method="POST" action="counter">
+  
+          {% csrf_token %}
+          <textarea name="text" role="25" cols="100"> </textarea>    
+          <input type="submit">
+      </form> -->
+  
+      
+  
+ 
+      <div class="top-bar">
+          <p class="message"> New day, new sale. Check out our COLLECTIONS here upto 70% off!  
+              <a href="#"> Shop Now!</a>    
+          </p>
+          
+      </div>
+  
+      <div class="navbarr">
+         <a href="about"> 
+         <img src="{% static 'logo.jpeg' %}"  height="86px" width="100px" style="margin-top: -15px;">
+        </a> 
+        {% if user.is_authenticated %}
+        <span class="links"> Hello, {{user.username}} </span>
+        {% endif %}
+        <div class="links">  
+        
+          <a href="/"> Home </a>
+                  <span href="#" class="sale"> 
+                
+                    Sale 
+                    <sup> New </sup>
+                    <div class="dropdown">
+                    <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>
+                      <br>
+                       <p>  Flat 30% Off </p>  </div> 
+                        
+                    <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a> <br>  <p>  Flat 30% Off </p>  </div>
+                    <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p>  Flat 30% Off  </p></div>
+                     <div> <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p> Flat 30% Off </p>  </div>
+  
+                    </div>
+                  </span>
+                  
+                  <a href="winter"> Winter Collection </a>
+                  <a href="newin">  New In </a>
+                
+         </div> 
+         
+         <div class="links-right"> 
+             <a href="#" >
+               <div class="icon-text">
+             <img src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw17a0e2f4/images/track.svg">
+            <span> Track   </span>        
+             </div> 
+          </a>
+  
+           <a href="#" >
+  <div class="icon-text">
+              <img style="width: 24px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw40f1f8d5/images/search.svg">
+          <span style="font-size: 15px;"> Search  </span> 
+          </div>
+           </a>
+           
+           {% if user.is_authenticated %}
+           <a href="logout"> 
+            <div class="icon-text"> 
+              <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+            <span> Logout  </span> </div> </a>
+           {% else %}
+           <a href="register">
+            <div class="icon-text">  
+              <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+              <span> Account </span>
+          </div>
+          </a>
+          {% endif%}
+           <a href="shipping">
+          <div class="icon-text" >  
+          
+              <img  style="width: 22px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dwf454b0df/images/shopping.svg">
+           
+          <span>Bag</span> 
+          </div></a>
+      </div>
+      </div>
+  
+  <div class="Body"> 
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="{% static 'register.jpg' %}" alt="">
+        <div class="text">
+          <span class="text-1">Every new friend is a <br> new adventure</span>
+          <span class="text-2">Let's get connected</span>
+        </div>
+      </div>
+      <div class="back">
+        <img class="backImg" src="images/backImg.jpg" alt="">
+        <div class="text">
+          <span class="text-1">Complete miles of journey <br> with one step</span>
+          <span class="text-2">Let's get started</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+        
+        <div class="signup-form">
+          <div class="title">Signup</div>
+          {% for message in messages %}
+          <h5 style="color: red;"> {{message}} </h5>
+          {% endfor %}
+        <form  method="POST" action="register">
+          {% csrf_token %}
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter your name" name="username" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" name="email" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input name="password"  type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Already have an account? <label ><a href="login">Login now </a>  </label>
+              
+              </div>
+            </div>
+      </form>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="footer_bottom">
+        <div class="col-sm-3">  
+      <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> 100% Safe Checkout  </span> <br>
+      <img src="https://pk.khaadi.com/on/demandware.static/-/Library-Sites-KhaadiSharedLibrary/default/dw3d659671/images/FooterImages/pay.png">
+    </div>
+    
+    <div class="col-sm-2" style="display: flex; justify-content: flex-end;  flex-direction: column;">  
+      <span   style="font-size: 13px; font-family: Arial, Helvetica, sans-serif; display: flex; justify-content: flex-end;"> Secured By  </span> 
+      <span style="display: flex; justify-content: flex-end;">
+      <img style="height: 36px; width: 147px;" src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_l_m.gif">
+    </span>
+    </div>
+    <div class="col-sm-1" style="display: flex; justify-content: flex-end;">
+      <img style="width: 50.58px; height: fit-content;"  src="{% static 'logo.jpeg' %}">
+    </div>
+    <div class="col-sm-6" style="display: flex; justify-content: flex-end;">  
+      <span  style="font-size: 13px; font-family: Arial, Helvetica, sans-serif;"> Copyright © 2023 Khaadi Corporation Limited & Khaadi Pakistan SMC Pvt. Ltd. All Rights Reserved. </span> <br>
+     
+    </div>
+    
+    </div>  
+    
+    </div>
+    </div>
+</body>
+</html>
+<script> 
+
+  window.addEventListener('scroll', function() {
+    var navbar = document.querySelector('.navbarr');
+    var topBar = document.querySelector('.top-bar');
+    if (window.scrollY > topBar.offsetHeight) {
+      navbar.classList.add('sticky');
+    } else {
+      navbar.classList.remove('sticky');
+    }
+  });
+</script>

@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Moonsapp  </title>
+<link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<style>
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .product-column {
+            display: flex;
+            flex-direction: column;
+            margin: 0 10px; /* Adjust the margin as needed */
+        }
+
+        .product-details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add margin between columns */
+            margin-top: 131px;
+        }
+
+        .product-image {
+            text-align: center;
+        }
+
+        .suggested-product .additional-suggested-product .product-details   img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .thumbs img{
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .suggested-products {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 131px;
+        }
+
+        .suggested-products h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .suggested-product {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .suggested-product img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .suggested-product-details {
+            flex: 1;
+        }
+
+        .add-to-cart {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Set the width of the first product-column to 70% */
+        .product-container .product-column:first-child {
+            flex: 0 0 70%;
+        }
+
+        /* Set the width of the second product-column to 30% */
+        .product-container .product-column:last-child {
+            flex: 0 0 30%;
+        }
+
+        /* Make adjustments for smaller image size */
+        /* .product-container .product-column:first-child .product-image img {
+            max-width: 60%; /* Adjust as needed */
+          
+
+        /* Display product description and image side by side */
+        .product-container .product-column:first-child .product-details {
+            display: flex;
+        }
+
+        .product-container .product-column:first-child .product-details .product-image {
+            margin-right: 20px; /* Adjust as needed for spacing */
+        }
+
+        /* Style for the additional suggestions */
+        .additional-suggestions {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* flex: 30%; Remove this line */
+        }
+
+        .additional-suggested-product {
+            display: flex;
+            align-items: center;
+            flex-direction: column; /* Adjusted to column layout */
+            margin-right: 20px; /* Add margin between products */
+        }
+
+        .additional-suggested-product img {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 10px; /* Add margin between image and details */
+        }
+
+        .additional-suggested-product-details {
+            flex: 1;
+        }
+   
+</style>
+<body> 
+    <div class="top-bar">
+        <p class="message"> New day, new sale. Check out our COLLECTIONS here upto 70% off!  
+            <a href="#"> Shop Now!</a>    
+        </p>
+        
+    </div>
+
+    <div class="navbarr">
+       <a href="about"> 
+       <img src="{% static 'logo.jpeg' %}"  height="86px" width="100px" style="margin-top: -15px;">
+      </a> 
+      {% if user.is_authenticated %}
+      <span class="links"> Hello, {{user.username}} </span>
+      {% endif %}
+      <div class="links">  
+      
+        <a href=""> Home </a>
+                <span href="#" class="sale"> 
+              
+                  Sale 
+                  <sup> New </sup>
+                  <div class="dropdown">
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>
+                    <br>
+                     <p>  Flat 30% Off </p>  </div> 
+                      
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a> <br>  <p>  Flat 30% Off </p>  </div>
+                  <div>  <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p>  Flat 30% Off  </p></div>
+                   <div> <a href="#"> <img src="https://pk.khaadi.com/on/demandware.static/-/Sites-storefront-catalog-pak/default/dwc31d5a66/images/megamenu/new-thumbnails-fabrics-30.jpg"> </a>  <br> <p> Flat 30% Off </p>  </div>
+
+                  </div>
+                </span>
+                
+                <a href="winter"> Winter Collection </a>
+                <a href="newin">  New In </a>
+              
+       </div> 
+       
+       <div class="links-right"> 
+           <a href="#" >
+             <div class="icon-text">
+           <img src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw17a0e2f4/images/track.svg">
+          <span> Track   </span>        
+           </div> 
+        </a>
+
+         <a href="#" >
+<div class="icon-text">
+            <img style="width: 24px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw40f1f8d5/images/search.svg">
+        <span style="font-size: 15px;"> Search  </span> 
+        </div>
+         </a>
+         
+         {% if user.is_authenticated %}
+         <a href="logout"> 
+          <div class="icon-text"> 
+            <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+          <span> Logout  </span> </div> </a>
+         {% else %}
+         <a href="register">
+          <div class="icon-text">  
+            <img style="width: 23px;" src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dw3178f9f9/images/user.svg">
+            <span> Account </span>
+        </div>
+        </a>
+        {% endif%}
+         <a href="shipping">
+        <div class="icon-text" >  
+        
+            <img  style="width: 22px;"  src="https://pk.khaadi.com/on/demandware.static/Sites-Khaadi_PK-Site/-/default/dwf454b0df/images/shopping.svg">
+         
+        <span>Bag</span> 
+        </div></a>
+    </div>
+    </div>
+
+
+<div class="product-container">
+    <div class="product-column">
+        <div class="product-details">
+            <div class="thumbs" id="mainThumbnailContainer">
+                <img style="height: 200px;" src="{% static 'o1.jpg' %}" alt="Thumbnail 1" onclick="changeMainImage('o1.jpg')">
+                <img style="height: 200px;" src="{% static 'o2.jpg' %}" alt="Thumbnail 2" onclick="changeMainImage('o2.jpg')">
+                <!-- Add more thumbnails as needed -->
+            </div>
+            <div class="product-image">
+                <img style="height: 460px; width: 340px;" src="{% static 'o1.jpg' %}" alt="Product Image 1" id="mainProductImage">
+            </div>
+
+            <div>
+                <h2>Product Name 1</h2>
+                <div class="add-to-cart">
+                    <button type="button" onclick="addToCart('Product Name 1', 50.00)">Add to Cart</button>
+                    <p>Price: $50.00</p><br>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="product-column">
+        <div class="suggested-products">
+            <h3>Suggested Products</h3>
+
+            <div class="suggested-product">
+                <img src="{% static 'o2.jpg' %}" alt="Product Image 2">
+                <div class="suggested-product-details">
+                    <h4>Product Name 2</h4>
+                    <p>Price: $60.00</p>
+                    <button type="button" onclick="addToCart('Product Name 2', 60.00)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="suggested-product">
+                <img src="{% static 'o3.jpg' %}" alt="Product Image 3">
+                <div class="suggested-product-details">
+                    <h4>Product Name 3</h4>
+                    <p>Price: $70.00</p>
+                    <button type="button" onclick="addToCart('Product Name 3', 70.00)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="suggested-product">
+                <img src="{% static 'o4.jpg' %}" alt="Product Image 4">
+                <div class="additional-suggested-product-details">
+                    <h4>Product Name 4</h4>
+                    <p>Price: $80.00</p>
+                    <button type="button" onclick="addToCart('Product Name 4', 80.00)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Add more suggested products as needed -->
+        </div>
+    </div>
+
+    <!-- Additional Suggestions -->
+
+</div>
+<div style="text-align: center;">
+    <h3>Additional Suggestions</h3>
+<div class="additional-suggestions">
+   
+    <div class="additional-suggested-product">
+        <img src="{% static 'o3.jpg' %}" alt="Product Image 3">
+        <div class="suggested-product-details">
+            <h4>Product Name 3</h4>
+            <p>Price: $70.00</p>
+            <button type="button" onclick="addToCart('Product Name 3', 70.00)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="additional-suggested-product">
+        <img src="{% static 'o4.jpg' %}" alt="Product Image 4">
+        <div class="additional-suggested-product-details">
+            <h4>Product Name 4</h4>
+            <p>Price: $80.00</p>
+            <button type="button" onclick="addToCart('Product Name 4', 80.00)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="additional-suggested-product">
+        <img src="{% static 'o5.jpg' %}" alt="Product Image 5">
+        <div class="additional-suggested-product-details">
+            <h4>Product Name 5</h4>
+            <p>Price: $90.00</p>
+            <button type="button" onclick="addToCart('Product Name 5', 90.00)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Add more additional suggested products as needed -->
+</div>
+</div>
+<script>
+    function changeMainImage(newImageSrc) {
+        // Get references to HTML elements
+        const mainProductImage = document.getElementById('mainProductImage');
+
+        // Set the source of the main image to the clicked thumbnail
+        mainProductImage.src = newImageSrc;
+    }
+
+        // Function to add a product to the cart
+        function addToCart(productName, price) {
+            // Check if 'cart' key exists in local storage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Add the selected product to the cart
+            cart.push({ productName, price });
+
+            // Update the cart in local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Optionally, you can display a message or update the UI to indicate success
+            alert('Product added to the cart!');
+        }
+    
+</script>
+</body>
+</html>
